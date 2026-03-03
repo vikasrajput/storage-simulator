@@ -33,11 +33,11 @@ Open the simulators directly via **GitHub Pages**:
 
 ## CLI (Planned)
 
-A command-line utility for running partition simulations, generating reports, and integrating into CI/CD pipelines. See [cli/README.md](cli/README.md).
+A command-line utility for running partition simulations, generating reports, and integrating into CI/CD pipelines. See [cli/README.md](abc/act/apply/code/storage-simulator/cli/README.md).
 
 ## Demo (Planned)
 
-End-to-end demos showcasing storage partition strategies with AI and analytical workloads. See [demo/README.md](demo/README.md).
+End-to-end demos showcasing storage partition strategies with AI and analytical workloads. See [demo/README.md](abc/act/apply/code/storage-simulator/demo/README.md).
 
 ## Getting Started
 

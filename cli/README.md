@@ -95,4 +95,4 @@ The CLI supports two authentication methods:
 
 ## Contributing
 
-See the root [README](../README.md) for contribution guidelines.
+See the root [README](abc/act/apply/code/storage-simulator/README.md) for contribution guidelines.
