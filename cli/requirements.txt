@@ -1,0 +1,7 @@
+azure-identity>=1.15.0
+azure-storage-blob>=12.19.0
+azure-storage-file-share>=12.15.0
+azure-data-tables>=12.5.0
+azure-mgmt-storage>=21.1.0
+click>=8.1.0
+rich>=13.7.0
