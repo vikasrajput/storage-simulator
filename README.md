@@ -1,6 +1,38 @@
 # Azure Storage Partition Strategy Simulator
 
-Storage Simulator and Utilities with Demos for AI and Analytical Workloads.
+Interactive, zero-install browser tools that let you **see** how Azure Storage partition behaviour affects your application — before a single byte hits production.
+
+## The Problem
+
+Storage throttling is the silent killer of cloud applications. Azure Storage partitions data across servers to scale horizontally, but every partition server has hard throughput ceilings:
+
+| Service | Per-Partition Limit | Account Limit |
+|---------|-------------------|---------------|
+| **Table Storage** | ~2,000 ops/sec | 20,000 ops/sec |
+| **Blob Storage** | ~20,000 req/sec (before auto-split) | 20,000 req/sec ingress |
+| **Azure Files** | Tier-dependent IOPS & throughput | Per-share provisioned limits |
+
+When your data or access patterns accidentally funnel traffic to a single partition — a **hot partition** — Azure returns HTTP 503 (Server Busy) and your application grinds to a halt. Retry storms amplify the problem, upstream services time out, and you're in a full outage.
+
+The brutal part: **you won't catch this in dev or staging.** It only surfaces at production scale, and the fix is a schema/naming redesign — the most expensive kind of change.
+
+## What These Simulators Do
+
+| Simulator | Core Question It Answers |
+|---|---|
+| **[Blob Storage](https://vikasrajput.github.io/storage-simulator/simulators/blob-partition-simulator.html)** | *Will my blob naming pattern create a hot partition server?* — Compares 6 naming strategies, visualizes partition spread, flags throttling risk. |
+| **[Table Storage](https://vikasrajput.github.io/storage-simulator/simulators/table-partition-simulator.html)** | *Will my PartitionKey strategy bottleneck under load?* — Simulates 6 key strategies, models entity distribution, detects when any partition exceeds 2,000 ops/sec. |
+| **[Azure Files](https://vikasrajput.github.io/storage-simulator/simulators/files-partition-simulator.html)** | *Is my file share configuration sized correctly?* — Models IOPS, throughput, and capacity against tier limits with visual gauges. |
+
+Each simulator validates inputs against real Azure service limits, produces interactive visualizations, and generates actionable recommendations specific to your configuration.
+
+## Why This Matters for Engineering Teams
+
+- **Shift-left on performance design.** Partition strategy is a day-zero architecture decision that's expensive to change later. Validate a design in 30 seconds instead of discovering problems in production.
+- **Zero friction.** No build step, no dependencies, no cost, no Azure account needed. Open the HTML in a browser or use [GitHub Pages](https://vikasrajput.github.io/storage-simulator/simulators/).
+- **Prevent the costliest outage pattern.** A 30-second simulation before deployment prevents a multi-hour throttling incident in production.
+- **Eliminate tribal knowledge.** The difference between `0001.json` (hot-partition anti-pattern) and `a3f_0001.json` (excellent distribution) is one line of code — but knowing *which* line requires deep Azure internals. The simulators encode that expertise into a self-service tool any engineer can use.
+- **Quantify risk in architecture reviews.** Run the simulator with your actual parameters (entity count, ops/sec, time span) and get a concrete answer instead of debating in a design doc.
 
 ## Project Structure
 

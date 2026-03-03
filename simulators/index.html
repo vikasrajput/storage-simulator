@@ -44,13 +44,9 @@
 
     <div class="sim-hub">
 
-      <div class="concept-box">
-        <h4>Why Partitioning Matters</h4>
-        Azure Storage distributes data across <strong>partition servers</strong> to scale horizontally. Each partition server
-        has throughput limits. If your data or access patterns concentrate on a single partition ("hot partition"),
-        you hit throttling — even if the overall storage account has capacity. The key to high performance is
-        <strong>spreading load evenly across partitions</strong>.
-      </div>
+      <p style="color:#555; font-size:13px; line-height:1.5; margin:0 0 18px 0;">
+        Storage throttling only surfaces at production scale. These simulators let you <strong>visualize partition behaviour and detect hot-spots before you deploy</strong> — no Azure account needed.
+      </p>
 
       <div class="card-grid">
 
@@ -106,20 +102,39 @@
         </div>
       </div>
 
-      <div class="concept-box">
-        <h4>Quick Decision Guide</h4>
-        <table>
-          <thead><tr style="border-bottom:2px solid #4183C4;">
-            <th>If you need…</th>
-            <th>Start with…</th>
-          </tr></thead>
-          <tbody>
-            <tr><td>High-throughput structured data, batch operations</td><td><strong>Table Storage</strong> simulator — PartitionKey design is critical</td></tr>
-            <tr><td>Large-scale blob ingestion (IoT, logs, media)</td><td><strong>Blob Storage</strong> simulator — naming pattern determines scale</td></tr>
-            <tr><td>Shared file system (SMB/NFS lift-and-shift)</td><td><strong>Azure Files</strong> simulator — tier and share sizing are key</td></tr>
-          </tbody>
-        </table>
-      </div>
+      <details style="margin-bottom:20px;">
+        <summary style="cursor:pointer; font-weight:600; color:#4183C4; font-size:14px; padding:8px 0;">Why partitioning matters &amp; quick decision guide ▾</summary>
+
+        <div class="concept-box" style="margin-top:12px;">
+          <h4>The Problem</h4>
+          Azure Storage distributes data across <strong>partition servers</strong> to scale horizontally, but each server has hard throughput ceilings (2,000 ops/sec for Table, 20,000 req/sec for Blob). A <strong>hot partition</strong> causes HTTP 503 throttling — and you typically won't catch it until production scale. The fix is a schema or naming redesign: the most expensive kind of change.
+        </div>
+
+        <div class="concept-box">
+          <h4>Why Use These Simulators</h4>
+          <ul style="margin:4px 0 0 16px; padding:0; font-size:13px; line-height:1.7;">
+            <li><strong>Shift-left</strong> — validate partition design in 30 seconds, not in a production incident.</li>
+            <li><strong>Eliminate tribal knowledge</strong> — the tool encodes Azure Storage internals so any engineer can self-serve.</li>
+            <li><strong>Quantify risk</strong> — get concrete ops/sec numbers instead of debating in a design doc.</li>
+            <li><strong>Zero friction</strong> — no build step, no dependencies, no cost, no Azure account.</li>
+          </ul>
+        </div>
+
+        <div class="concept-box">
+          <h4>Quick Decision Guide</h4>
+          <table>
+            <thead><tr style="border-bottom:2px solid #4183C4;">
+              <th>If you need…</th>
+              <th>Start with…</th>
+            </tr></thead>
+            <tbody>
+              <tr><td>High-throughput structured data, batch operations</td><td><strong>Table Storage</strong> — PartitionKey design is critical</td></tr>
+              <tr><td>Large-scale blob ingestion (IoT, logs, media)</td><td><strong>Blob Storage</strong> — naming pattern determines scale</td></tr>
+              <tr><td>Shared file system (SMB/NFS lift-and-shift)</td><td><strong>Azure Files</strong> — tier and share sizing are key</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
 
     </div>
 
